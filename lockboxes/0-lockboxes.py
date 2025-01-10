@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """ defines method to solve lockboxes problem """
 
+
 def canUnlockAll(boxes):
     """
     Determines if all boxes can be unlocked.
 
     Parameters:
-        boxes (list): List of lists representing boxes and the keys inside them.
+        boxes(list): List of lists representing boxes and the keys inside them
             - There are n boxes labeled from 0 to n-1.
             - A key with the same number as a box unlocks that box.
             - All keys are positive integers.
