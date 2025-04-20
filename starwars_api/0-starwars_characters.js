@@ -1,25 +1,38 @@
 #!/usr/bin/node
+
 const request = require('request');
+
 const movieId = process.argv[2];
-const options = {
-  url: 'https://swapi-api.hbtn.io/api/films/' + movieId,
-  method: 'GET'
-};
-
-request(options, function (error, response, body) {
-  if (!error) {
-    const characters = JSON.parse(body).characters;
-    printCharacters(characters, 0);
-  }
-});
-
-function printCharacters (characters, index) {
-  request(characters[index], function (error, response, body) {
-    if (!error) {
-      console.log(JSON.parse(body).name);
-      if (index + 1 < characters.length) {
-        printCharacters(characters, index + 1);
-      }
-    }
-  });
+if (!movieId) {
+  console.error('Usage: ./0-starwars_characters.js <movie_id>');
+  process.exit(1);
 }
+
+const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+
+request(url, (err, res, body) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  const data = JSON.parse(body);
+  const characters = data.characters;
+
+  const printCharacter = (index) => {
+    if (index >= characters.length) return;
+
+    request(characters[index], (err2, res2, body2) => {
+      if (err2) {
+        console.error(err2);
+        return;
+      }
+
+      const characterData = JSON.parse(body2);
+      console.log(characterData.name);
+      printCharacter(index + 1);
+    });
+  };
+
+  printCharacter(0);
+});
