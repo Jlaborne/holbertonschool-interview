@@ -35,7 +35,10 @@ int _strlen(char *s)
 }
 
 /**
- * _putchar - writes a character to stdout (defined in separate _putchar.c)
+ * _putchar - Writes a character to stdout
+ * @c: The character to print
+ *
+ * Return: 1 on success, -1 on error
  */
 int _putchar(char c);
 
