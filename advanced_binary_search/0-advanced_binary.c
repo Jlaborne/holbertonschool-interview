@@ -43,18 +43,16 @@ int recursive_search(int *array, int left, int right, int value)
 
 	if (array[mid] == value)
 	{
-		/* Check if it's the first occurrence */
 		if (mid == left || array[mid - 1] != value)
 			return (mid);
-		/* Continue on the left half */
-		return (recursive_search(array, left, mid, value));
+		/* Continue to search on the left for earlier occurrence */
+		return (recursive_search(array, left, mid - 1, value));
 	}
 	else if (array[mid] > value)
 		return (recursive_search(array, left, mid - 1, value));
 	else
 		return (recursive_search(array, mid + 1, right, value));
 }
-
 
 /**
  * advanced_binary - Searches for first occurrence of value in sorted array
@@ -69,5 +67,5 @@ int advanced_binary(int *array, size_t size, int value)
 	if (!array || size == 0)
 		return (-1);
 
-	return (recursive_search(array, 0, size - 1, value));
+	return (recursive_search(array, 0, (int)size - 1, value));
 }
