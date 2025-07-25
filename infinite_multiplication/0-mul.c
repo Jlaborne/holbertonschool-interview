@@ -1,5 +1,6 @@
 #include "holberton.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 /**
  * _isdigit - checks if a string contains only digits
