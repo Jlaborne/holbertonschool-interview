@@ -35,7 +35,7 @@ int *find_substring(char const *s, char const **words, int nb_words, int *n)
     int *indices = NULL;
     int capacity, found = 0;
     size_t s_len;
-    int L, U = 0, i, j, k;
+    int L, U = 0, i, j;
 
     if (n)
         *n = 0;
@@ -88,7 +88,6 @@ int *find_substring(char const *s, char const **words, int nb_words, int *n)
     qsort((void *)uniq, (size_t)U, sizeof(*uniq), cmp_words);
 
     /* Rebuild need[] to match the sorted uniq[] order */
-    /* First, count again into a temp array aligned to sorted uniq[] */
     int *need_sorted = calloc((size_t)U, sizeof(*need_sorted));
     if (!need_sorted)
     {
@@ -181,10 +180,6 @@ int *find_substring(char const *s, char const **words, int nb_words, int *n)
         free(indices);
         return NULL;
     }
-
-    /* Optionally shrink allocation (not required) */
-    /* int *tmp = realloc(indices, (size_t)found * sizeof(*indices));
-    if (tmp) indices = tmp; */
 
     *n = found;
     return indices;
